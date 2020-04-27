@@ -14,18 +14,16 @@
 """
 # Libraries required
 
-import random
-import operator
+#import random
+#import operator
 import matplotlib
 import matplotlib.pyplot
 import matplotlib.animation 
 import agentframework
-import os
-import pathlib
+#import os
+#import pathlib
 import csv
 import tkinter
-import requests
-import bs4
 
 # Create Variables and blank Lists
 
@@ -37,16 +35,6 @@ agents = []
 fig = matplotlib.pyplot.figure(figsize=(7, 7))
 carry_on = True
 matplotlib.use('TkAgg')
-
-# Read data from web page
-
-r = requests.get('http://www.geog.leeds.ac.uk/courses/computing/practicals/python/agent-framework/part9/data.html')
-content = r.text
-soup = bs4.BeautifulSoup(content, 'html.parser')
-td_ys = soup.find_all(attrs={"class" : "y"})
-td_xs = soup.find_all(attrs={"class" : "x"})
-#print(td_ys)
-#print(td_xs)
 
 # Read in data file into Lists
 
@@ -67,9 +55,8 @@ def update(frame_number):   # Module for creating animation
 # Make the agents.
 
     for i in range(num_of_agents):  # Repeat for number of agents
-        y = int(td_ys[i].text)  # Extracts the y value from the rest of the text
-        x = int(td_xs[i].text)  # Extracts the x value from the rest of the text
-        agents.append(agentframework.Agent(agents, environment, y, x))  # Pass arguments to module and return result into a
+        a = agentframework.Agent(agents, environment)    # Pass arguments to module and return result into a
+        agents.append(a)    # Apend a to end of List
 
 # Move the agents.
     
@@ -80,15 +67,13 @@ def update(frame_number):   # Module for creating animation
             agents[i].share_with_neighbours(neighbourhood)
        
        
-# Plot points
+#Plot points
 
     matplotlib.pyplot.xlim(0, int(max(environment[1]))) # Set the extent of the Y axis
     matplotlib.pyplot.ylim(0, int(max(environment[0]))) # Set the extent of the X axis
     matplotlib.pyplot.imshow(environment)
     for i in range(num_of_agents):
         matplotlib.pyplot.scatter(agents[i].x,agents[i].y)
-
-# Building and displaying a GUI
 
 def run():
     animation = matplotlib.animation.FuncAnimation(fig, update, interval=1,repeat=False, frames=num_of_iterations)  # Create animation call
