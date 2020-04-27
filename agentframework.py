@@ -14,10 +14,10 @@ import random
 
 class Agent():
         
-    def __init__(self, agents, environment):        # Constructor with 2 additional arguments
+    def __init__(self, agents, environment, y, x):        # Constructor with 2 additional arguments
         self.agents = agents                        # Pass agents argument
-        self.y = random.randint(0,99)               # set y to a random No. between 0 & Max Y value
-        self.x = random.randint(0,99)               # set y to a random No. between 0 & Max X Value
+        self.y = y               # set y to a random No. between 0 & Max Y value
+        self.x = x               # set y to a random No. between 0 & Max X Value
         self.environment = environment              # Pass environment argument
         self.store = 0                              # We'll come to this in a second.
     
